@@ -131,5 +131,79 @@ If you use this code for your research, please consider citing:
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ```
+# MedFuse Extensions
 
+This repository contains extensions to the MedFuse model, a multi-modal fusion approach for integrating clinical time-series data and chest X-ray images for healthcare prediction tasks.
 
+## New Extensions
+
+The original MedFuse model has been extended with several key enhancements:
+
+1. **Attention-Based MedFuse**: Incorporates multi-head attention mechanisms to improve interpretability and reveal the relative importance of each modality.
+
+2. **Transformer-Based MedFuse**: Implements a Transformer-based architecture as an alternative to the LSTM-based fusion module, leveraging the power of self-attention for cross-modal relationships.
+
+3. **Temporal Alignment Module**: Enhances cross-modal alignment by explicitly modeling the time relationship between clinical time-series data and chest X-rays.
+
+4. **Cross-Modal Generation**: Adds the ability to generate features for missing modalities, improving performance in partially paired settings.
+
+5. **Visualization Tools**: Provides tools for visualizing attention weights and modality importance, enhancing interpretability.
+
+## Understanding Optimal Uni-Modal Sample Percentages
+
+One key finding in the original MedFuse paper is that using an optimal percentage of uni-modal samples during training improves performance. The extensions provide tools for analyzing and understanding why this works:
+
+- The `analyze_models_across_ratios` function compares feature representations across different uni-modal ratios
+- Distance analysis between paired and unpaired samples reveals the impact of uni-modal samples on feature space
+- t-SNE visualizations help understand the feature space organization
+
+## Running the Extensions
+
+### Requirements
+
+Same as the original MedFuse requirements, plus:
+scikit-learn>=1.0.0
+seaborn>=0.11.0
+
+### Training Models
+
+To train a model with the extensions:
+
+```bash
+python extended_main.py --fusion_module [medfuse|attention|transformer] \
+                        --task [in-hospital-mortality|phenotyping] \
+                        --data_ratio [0.1|0.2|0.3|0.5|0.7|1.0] \
+                        --mode train \
+                        --use_temporal_alignment \
+                        --cross_modal_generation \
+                        --visualize_attention
+```
+
+### Evaluating Models
+
+To evaluate a trained model:
+
+```bash
+python extended_main.py --fusion_module [medfuse|attention|transformer] \
+                        --task [in-hospital-mortality|phenotyping] \
+                        --mode eval \
+                        --load_state [path/to/checkpoint]
+```
+
+### Running Benchmarks
+
+To compare all models and extensions:
+
+```bash
+python benchmark_models.py --task [in-hospital-mortality|phenotyping] \
+                          --save_dir benchmarks
+```
+
+### Analyzing Uni-Modal Ratios
+
+To analyze why certain uni-modal ratios perform better:
+
+```bash
+python analyze_uni_modal.py --task [in-hospital-mortality|phenotyping] \
+                           --save_dir analysis
+```

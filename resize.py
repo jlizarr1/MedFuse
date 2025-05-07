@@ -8,7 +8,7 @@ from tqdm import tqdm
 import os
 
 print('starting')
-data_dir = 'physionet.org/files/mimic-cxr-jpg'
+data_dir = 'cxr_data/physionet.org/files/mimic-cxr-jpg'
 version = '2.0.0'
 
 paths_done = glob.glob(f'{data_dir}/{version}/resized/**/*.jpg', recursive = True)
@@ -17,7 +17,8 @@ print('done', len(paths_done))
 paths_all = glob.glob(f'{data_dir}/{version}/files/**/*.jpg', recursive = True)
 print('all', len(paths_all))
 
-
+resized_dir = f'{data_dir}/{version}/resized'
+os.makedirs(resized_dir, exist_ok=True)
 
 done_files = [os.path.basename(path) for path in paths_done]
 

@@ -66,6 +66,20 @@ def args_parser():
                         default='data/physionet.org/files/mimic-cxr-jpg/2.0.0')
     parser.add_argument('--save_dir', type=str, help='Directory relative which all output files are stored',
                     default='checkpoints')
+    
+    # New arguments for extensions
+    parser.add_argument('--fusion_module', type=str, default='medfuse', 
+                        help='Fusion module type: medfuse, attention, transformer')
+    parser.add_argument('--use_temporal_alignment', action='store_true',
+                        help='Use temporal alignment module')
+    parser.add_argument('--cross_modal_generation', action='store_true',
+                        help='Use cross-modal generation for missing modalities')
+    parser.add_argument('--attention_heads', type=int, default=4,
+                        help='Number of attention heads')
+    parser.add_argument('--visualize_attention', action='store_true',
+                        help='Visualize attention weights')
+    parser.add_argument('--optimal_uni_ratio', type=float, default=None,
+                        help='Optimal percentage of uni-modal samples (0.1 for mortality, 0.2 for phenotyping)')
 
 
     # args = argParser.parse_args()

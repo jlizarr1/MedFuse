@@ -4,9 +4,9 @@ import numpy as np
 
 
 
-ehr_data_dir = 'data/mimic-iv-extracted/phenotyping'
+ehr_data_dir = 'ehr_data/physionet.org/files/mimiciv/1.0'
 
-cxr_data_dir = 'data/physionet.org/files/mimic-cxr-jpg/2.0.0'
+cxr_data_dir = 'cxr_data/physionet.org/files/mimic-cxr-jpg/2.0.0'
 
 cxr_splits = pd.read_csv(f'{cxr_data_dir}/mimic-cxr-2.0.0-split.csv')
 print(f'before update {cxr_splits.split.value_counts()}')

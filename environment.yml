@@ -34,3 +34,5 @@ dependencies:
     - fuzzywuzzy>=0.18.0
     - warmup-scheduler==0.3
     - neptune-client>=1.0.0
+    - numpy==1.24.3
+    - seaborn
