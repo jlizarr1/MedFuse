@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from sklearn import metrics
+from .trainer import Trainer
 
 class AttentionFusionTrainer(Trainer):
     def __init__(self, 
